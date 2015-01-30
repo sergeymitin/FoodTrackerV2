@@ -21,6 +21,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let kAppId = "13ecd6b9"
     let kAppKey = "2eb8fc722e1ec27acff39b259d459677"
+    
+    var jsonResponse:NSDictionary!
+    var apiSearchForFoods:[(name: String, idValue: String)] = []
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,8 +125,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var conversionError: NSError?
             var jsonDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves, error: &conversionError) as? NSDictionary
             println(jsonDictionary)
+            
+            
+            if conversionError != nil {
+                println(conversionError!.localizedDescription)
+                let errorString = NSString(data: data, encoding: NSUTF8StringEncoding)
+                println("Error in Parsing \(errorString)")
+            }
+            else {
+                if jsonDictionary != nil {
+                    self.jsonResponse = jsonDictionary!
+                    self.apiSearchForFoods = DataController.jsonAsUSDAIdAndNameSearchResults(jsonDictionary!)
+                }
+                else {
+                    let errorString = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    println("Error Could not Parse JSON \(errorString)")
+                }                
+            }
+            
+            
         })
-        
+        task.resume()
     }
     
 

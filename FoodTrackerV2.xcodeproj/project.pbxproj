@@ -15,6 +15,7 @@
 		A09F68481A7C1948001789D4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A09F68461A7C1948001789D4 /* LaunchScreen.xib */; };
 		A09F68541A7C1948001789D4 /* FoodTrackerV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09F68531A7C1948001789D4 /* FoodTrackerV2Tests.swift */; };
 		A09F68601A7C1C5B001789D4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09F685F1A7C1C5B001789D4 /* DetailViewController.swift */; };
+		A09F68621A7C2661001789D4 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09F68611A7C2661001789D4 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		A09F68521A7C1948001789D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A09F68531A7C1948001789D4 /* FoodTrackerV2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerV2Tests.swift; sourceTree = "<group>"; };
 		A09F685F1A7C1C5B001789D4 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A09F68611A7C2661001789D4 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			children = (
 				A09F683A1A7C1948001789D4 /* AppDelegate.swift */,
 				A09F683F1A7C1948001789D4 /* ViewController.swift */,
+				A09F68611A7C2661001789D4 /* DataController.swift */,
 				A09F685F1A7C1C5B001789D4 /* DetailViewController.swift */,
 				A09F68411A7C1948001789D4 /* Main.storyboard */,
 				A09F68441A7C1948001789D4 /* Images.xcassets */,
@@ -218,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A09F68621A7C2661001789D4 /* DataController.swift in Sources */,
 				A09F68401A7C1948001789D4 /* ViewController.swift in Sources */,
 				A09F683E1A7C1948001789D4 /* FoodTrackerV2.xcdatamodeld in Sources */,
 				A09F683B1A7C1948001789D4 /* AppDelegate.swift in Sources */,
