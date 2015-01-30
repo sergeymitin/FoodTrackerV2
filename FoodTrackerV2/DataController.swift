@@ -83,10 +83,33 @@ class DataController {
                                 else {
                                     usdaItem.calcium = "0"
                                 }
+                                
+                                if usdaFieldsDictionary["CHOCDF"] != nil {
+                                    let carbohydrateDictionary = usdaFieldsDictionary["CHOCDF"]! as NSDictionary
+                                    if carbohydrateDictionary["value"] != nil {
+                                        let carbohydrateValue: AnyObject = carbohydrateDictionary["value"]!
+                                        usdaItem.carbohydrate = "\(carbohydrateValue)"
+                                    }
+                                }
+                                else {
+                                    usdaItem.carbohydrate = "0"
+                                }
+                                
+                                if usdaFieldsDictionary["FAT"] != nil {
+                                    let fatTotalDictionary = usdaFieldsDictionary["FAT"]! as NSDictionary
+                                    if fatTotalDictionary["value"] != nil {
+                                        let fatTotalValue:AnyObject = fatTotalDictionary["value"]!
+                                        usdaItem.fatTotal = "\(fatTotalValue)"
+                                    }
+                                }
+                                else {
+                                    usdaItem.fatTotal = "0"
+                                }
+                                
+                                
+
+
                             }
-                            
-                            
-                            
                             
                             
                         }
