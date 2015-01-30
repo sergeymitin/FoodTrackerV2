@@ -25,6 +25,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var jsonResponse:NSDictionary!
     var apiSearchForFoods:[(name: String, idValue: String)] = []
     
+    var dataController = DataController()
     
 
     override func viewDidLoad() {
@@ -114,6 +115,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             makeRequest(searchFoodName)
         }
         else if selectedScopeButtonIndex == 1 {
+            let idValue = apiSearchForFoods[indexPath.row].idValue
+            self.dataController.saveUSDAItemForId(idValue, json: self.jsonResponse)
         }
         else if selectedScopeButtonIndex == 2 {
         }
