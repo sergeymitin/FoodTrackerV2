@@ -40,6 +40,10 @@ class DataController {
         if json["hits"] != nil {
             let results:[AnyObject] = json["hits"]! as [AnyObject]
             for itemDictionary in results {
+                
+                if itemDictionary["_id"] != nil && itemDictionary["_id"] as String == idValue {
+                }
+                
             }
         }
     }
