@@ -12,7 +12,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
     
+    var suggestedSearchFoods:[String] = []
+    var filteredSuggestedSearchFoods:[String] = []
+    
     var searchController: UISearchController!
+    
+    var scopeButtonTitles = ["Recommended", "Search Results", "Saved"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +34,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.searchController.searchBar.delegate = self
         self.definesPresentationContext = true
         
+        self.suggestedSearchFoods = ["apple", "bagel", "banana", "beer", "bread", "carrots", "cheddar cheese", "chicen breast", "chili with beans", "chocolate chip cookie", "coffee", "cola", "corn", "egg", "graham cracker", "granola bar", "green beans", "ground beef patty", "hot dog", "ice cream", "jelly doughnut", "ketchup", "milk", "mixed nuts", "mustard", "oatmeal", "orange juice", "peanut butter", "pizza", "pork chop", "potato", "potato chips", "pretzels", "raisins", "ranch salad dressing", "red wine", "rice", "salsa", "shrimp", "spaghetti", "spaghetti sauce", "tuna", "white wine", "yellow cake"]
+        
+        self.searchController.searchBar.scopeButtonTitles = scopeButtonTitles
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,14 +49,45 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Mark - UITableViewDataSource
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
+        var foodName : String
+        if self.searchController.active {
+            foodName = filteredSuggestedSearchFoods[indexPath.row]
+        }
+        else {
+            foodName = suggestedSearchFoods[indexPath.row]
+        }
+        cell.textLabel?.text = foodName
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        return cell
     }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        if self.searchController.active {
+            return self.filteredSuggestedSearchFoods.count
+        }
+        else {
+            return self.suggestedSearchFoods.count
+        }
     }
+    
+    
     // Mark - UISearchResultsUpdating
     func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let searchString = self.searchController.searchBar.text
+        let selectedScopeButtonIndex = self.searchController.searchBar.selectedScopeButtonIndex
+        self.filterContentForSearch(searchString, scope: selectedScopeButtonIndex)
+        self.tableView.reloadData()
     }
+    
+    func filterContentForSearch (searchText: String, scope: Int) {
+        self.filteredSuggestedSearchFoods = self.suggestedSearchFoods.filter({ (food : String) -> Bool in
+            var foodMatch = food.rangeOfString(searchText)
+            return foodMatch != nil
+        })
+    }
+    
+
 
 }
 
