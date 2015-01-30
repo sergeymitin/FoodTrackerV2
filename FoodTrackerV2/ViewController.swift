@@ -79,6 +79,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let selectedScopeButtonIndex = self.searchController.searchBar.selectedScopeButtonIndex
         if selectedScopeButtonIndex == 0 {
@@ -94,6 +95,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         else {
             return 0
+        }
+    }
+    
+    
+    //UITableViewDelegate
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let selectedScopeButtonIndex = self.searchController.searchBar.selectedScopeButtonIndex
+        if selectedScopeButtonIndex == 0 {
+            var searchFoodName:String
+            if self.searchController.active {
+                searchFoodName = filteredSuggestedSearchFoods[indexPath.row]
+            }
+            else {
+                searchFoodName = suggestedSearchFoods[indexPath.row]
+            }
+            self.searchController.searchBar.selectedScopeButtonIndex = 1
+            makeRequest(searchFoodName)
+        }
+        else if selectedScopeButtonIndex == 1 {
+        }
+        else if selectedScopeButtonIndex == 2 {
         }
     }
     
@@ -156,6 +178,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if jsonDictionary != nil {
                     self.jsonResponse = jsonDictionary!
                     self.apiSearchForFoods = DataController.jsonAsUSDAIdAndNameSearchResults(jsonDictionary!)
+                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.tableView.reloadData()
+                    })
+                    
                 }
                 else {
                     let errorString = NSString(data: data, encoding: NSUTF8StringEncoding)
