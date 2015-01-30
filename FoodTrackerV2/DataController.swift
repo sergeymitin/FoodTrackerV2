@@ -71,6 +71,24 @@ class DataController {
                                 usdaItem.name = fieldsDictionary["item_name"]! as String
                                 
                             }
+                            
+                            if fieldsDictionary["usda_fields"] != nil {
+                                let usdaFieldsDictionary = fieldsDictionary["usda_fields"]! as NSDictionary
+                                
+                                if usdaFieldsDictionary["CA"] != nil {
+                                    let calciumDictionary = usdaFieldsDictionary["CA"]! as NSDictionary
+                                    let calciumValue: AnyObject = calciumDictionary["value"]!
+                                    usdaItem.calcium = "\(calciumValue)"
+                                }
+                                else {
+                                    usdaItem.calcium = "0"
+                                }
+                            }
+                            
+                            
+                            
+                            
+                            
                         }
                         
                         
